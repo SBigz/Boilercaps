@@ -1,0 +1,17 @@
+{
+  "name": "capsulator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Capsulator.js",
+  "scripts": {
+    "start": "node Capsulator.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Sacha Bigou - CodeSacha",
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^9.2.6"
+  },
+  "type": "module"
+}
