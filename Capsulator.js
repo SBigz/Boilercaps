@@ -1,7 +1,19 @@
-#!/usr/bin/env node 
+#!/usr/bin/env node
 
-const inquirer = require("inquirer");
-const { execSync } = require("child_process");
+import inquirer from "inquirer";
+import { execSync } from "child_process";
+
+// Couleurs pour les messages.
+const colors = {
+  reset: "\x1b[0m",
+  bright: "\x1b[1m",
+  underscore: "\x1b[4m",
+  redMatrix: "\x1b[31;5;58m",
+  blackBackground: "\x1b[40m",
+  whiteText: "\x1b[37m",
+  whiteBackground: "\x1b[47m",
+  blackText: "\x1b[30m",
+};
 
 // Fonction qui vérifie si une commande est installée sur le système.
 function commandExists(command) {
@@ -20,16 +32,16 @@ async function ensureCommandExists(command) {
       {
         type: "confirm",
         name: "install",
-        message: `${command} n'est pas installé. Voulez-vous l'installer maintenant?`,
+        message: `${command} n'est pas installé. Voulez-vous l'installer maintenant ? (☝ ՞ਊ ՞)☝`,
         default: true,
       },
     ]);
 
     if (install) {
-      execSync(`npm install -g ${command}`, { stdio: "inherit" });
+      execSync(`sudo npm install -g ${command}`, { stdio: "inherit" });
     } else {
       console.error(
-        `${command} est nécessaire pour continuer. Installation annulée.`
+        `${command} est nécessaire pour continuer. Installation annulée. (ノಠ益ಠ)ノ彡┻━┻`
       );
       process.exit(1);
     }
@@ -38,25 +50,35 @@ async function ensureCommandExists(command) {
 
 async function main() {
   // Affiche un message de bienvenue.
-  console.log("Bienvenue dans Capsulator !");
+  console.log(`\n${colors.redMatrix + colors.bright}
+ ▄████▄   ▄▄▄       ██▓███    ██████  █    ██  ██▓    ▄▄▄     ▄▄▄█████▓ ▒█████   ██▀███  
+▒██▀ ▀█  ▒████▄    ▓██░  ██▒▒██    ▒  ██  ▓██▒▓██▒   ▒████▄   ▓  ██▒ ▓▒▒██▒  ██▒▓██ ▒ ██▒
+▒▓█    ▄ ▒██  ▀█▄  ▓██░ ██▓▒░ ▓██▄   ▓██  ▒██░▒██░   ▒██  ▀█▄ ▒ ▓██░ ▒░▒██░  ██▒▓██ ░▄█ ▒
+▒▓▓▄ ▄██▒░██▄▄▄▄██ ▒██▄█▓▒ ▒  ▒   ██▒▓▓█  ░██░▒██░   ░██▄▄▄▄██░ ▓██▓ ░ ▒██   ██░▒██▀▀█▄  
+▒ ▓███▀ ░ ▓█   ▓██▒▒██▒ ░  ░▒██████▒▒▒▒█████▓ ░██████▒▓█   ▓██▒ ▒██▒ ░ ░ ████▓▒░░██▓ ▒██▒
+░ ░▒ ▒  ░ ▒▒   ▓▒█░▒▓▒░ ░  ░▒ ▒▓▒ ▒ ░░▒▓▒ ▒ ▒ ░ ▒░▓  ░▒▒   ▓▒█░ ▒ ░░   ░ ▒░▒░▒░ ░ ▒▓ ░▒▓░
+  ░  ▒     ▒   ▒▒ ░░▒ ░     ░ ░▒  ░ ░░░▒░ ░ ░ ░ ░ ▒  ░ ▒   ▒▒ ░   ░      ░ ▒ ▒░   ░▒ ░ ▒░
+░          ░   ▒   ░░       ░  ░  ░   ░░░ ░ ░   ░ ░    ░   ▒    ░      ░ ░ ░ ▒    ░░   ░ 
+░ ░            ░  ░               ░     ░         ░  ░     ░  ░            ░ ░     ░     
+░                                                                                        \n`);
 
   const { projectName, projectType, dependencies } = await inquirer.prompt([
     {
       type: "input",
       name: "projectName",
-      message: "Quel est le nom de votre projet?",
-      default: "my-react-app",
+      message: "Quel est le nom de votre projet ?",
+      default: "my-capsulator-app",
     },
     {
       type: "list",
       name: "projectType",
-      message: "Quel type de projet voulez-vous créer?",
+      message: "Quel type de projet voulez-vous créer ?",
       choices: ["react", "react-native", "expo"],
     },
     {
       type: "checkbox",
       name: "dependencies",
-      message: "Quelles dépendances supplémentaires voulez-vous installer?",
+      message: "Quelles dépendances supplémentaires voulez-vous installer ?",
       choices: [
         "@expo/webpack-config",
         "@fortawesome/fontawesome-svg-core",
@@ -113,7 +135,11 @@ async function main() {
 
   const projectDeps = defaultDeps[projectType].concat(dependencies);
 
-  console.log(`Création d'un nouveau projet ${projectType} nommé ${projectName}...`);
+  console.log(
+    `\n${
+      colors.redMatrix + colors.bright
+    }╰( ͡° ͜ʖ ͡° )つ──☆*:・ﾟ Création d'un nouveau projet ${projectType} nommé ${projectName}...\n`
+  );
 
   await ensureCommandExists(`create-${projectType}-app`);
 
@@ -121,15 +147,34 @@ async function main() {
     stdio: "inherit",
   });
 
-  console.log("Installation des dépendances...");
+  console.log(
+    `\n${
+      colors.redMatrix + colors.bright + colors.underscore
+    }(づ ￣ ³￣)づ Installation des dépendances...\n`
+  );
 
   for (const dep of projectDeps) {
-    console.log(`Installation de ${dep}...`);
+    console.log(
+      `\n\n${
+        colors.redMatrix + colors.bright
+      }Installation de ${dep}... (˵ ͡° ͜ʖ ͡°˵)\n`
+    );
     execSync(`cd ${projectName} && npm install ${dep}`, { stdio: "inherit" });
   }
 
-  console.log("Tout est terminé !");
-  console.log("© 2023 Sacha Bigou - CodeSacha. https://github.com/SBigz/Capsulator"); // Remplacez "Votre nom" par votre nom.
+  console.log(
+    `\n${
+      colors.redMatrix + colors.bright + colors.underscore
+    }ʕっ•ᴥ•ʔっ Tout est Prêt !\n`
+  );
+
+  console.log(
+    `\n${colors.redMatrix + colors.bright + colors.underscore}© 2023 ${
+      colors.whiteText + colors.blackBackground
+    }Code${colors.blackText + colors.whiteBackground}Sacha${
+      colors.reset + colors.redMatrix + colors.bright + colors.underscore
+    } https://github.com/SBigz/Capsulator\n`
+  );
 }
 
 main().catch((err) => console.error(err));
