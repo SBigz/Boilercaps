@@ -8,8 +8,14 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Sacha Bigou - CodeSacha",
-  "license": "ISC",
+  "author": "codesacha",
+  "contributors": [
+    {
+      "name": "Sacha Bigou - codesacha",
+      "email": "contact@codesacha.xyz"
+    }
+  ],
+  "license": "MIT",
   "dependencies": {
     "inquirer": "^9.2.6"
   },
