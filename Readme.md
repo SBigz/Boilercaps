@@ -1,14 +1,14 @@
-# Capsulator
+# Boilercaps
 
-![npm](https://img.shields.io/npm/v/capsulator)
-![build](https://img.shields.io/github/workflow/status/SBigz/Capsulator/build)
+![npm](https://img.shields.io/npm/v/boilercaps)
+![build](https://img.shields.io/github/workflow/status/SBigz/Boilercaps/build)
 
-Capsulator est un outil de génération de projets qui vous aide à créer rapidement des applications frontend et backend en JavaScript et Node.js.
+Boilercaps est un outil de génération de projets qui vous aide à créer rapidement des applications frontend et backend en JavaScript et Node.js.
 
 ## 🚀 Installation
 
 ```bash
-npm install -g capsulator
+npm install -g boilercaps
 ```
 
 ## 🕹️ Utilisation
@@ -16,7 +16,7 @@ npm install -g capsulator
 Pour créer un nouveau projet, utilisez simplement la commande suivante et suivez les instructions:
 
 ```bash
-capsulator create
+boilercaps create
 ```
 
 Vous pouvez choisir parmi plusieurs types de projets :

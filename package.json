@@ -1,10 +1,10 @@
 {
-  "name": "capsulator",
+  "name": "boilercaps",
   "version": "1.0.1",
   "description": "",
-  "main": "Capsulator.js",
+  "main": "Boilercaps.js",
   "scripts": {
-    "start": "node Capsulator.js",
+    "start": "node Boilercaps.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
