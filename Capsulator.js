@@ -27,8 +27,6 @@ const dependencies = {
     "antd",
     "formik",
     "moment",
-    "react",
-    "react-dom",
     "react-moment",
     "react-router-dom",
     "styled-components",
@@ -51,9 +49,6 @@ const dependencies = {
     "formik",
     "lottie-react-native",
     "moment",
-    "react",
-    "react-dom",
-    "react-native",
     "react-native-app-intro-slider",
     "react-native-gesture-handler",
     "react-native-get-random-values",
@@ -99,8 +94,6 @@ const dependencies = {
     "expo-updates",
     "lottie-react-native",
     "moment",
-    "react",
-    "react-dom",
     "react-moment",
     "react-native",
     "react-native-app-intro-slider",
@@ -129,9 +122,6 @@ const dependencies = {
     "antd",
     "formik",
     "moment",
-    "next",
-    "react",
-    "react-dom",
     "react-moment",
     "react-router-dom",
     "styled-components",
@@ -173,27 +163,12 @@ async function ensureCommandExists(command) {
   }
 }
 
-let backendProjectName;
-
-async function main() {
-  // Affiche un message de bienvenue.
-  console.log(`\n${colors.redMatrix + colors.bright}
- ▄████▄   ▄▄▄       ██▓███    ██████  █    ██  ██▓    ▄▄▄     ▄▄▄█████▓ ▒█████   ██▀███  
-▒██▀ ▀█  ▒████▄    ▓██░  ██▒▒██    ▒  ██  ▓██▒▓██▒   ▒████▄   ▓  ██▒ ▓▒▒██▒  ██▒▓██ ▒ ██▒
-▒▓█    ▄ ▒██  ▀█▄  ▓██░ ██▓▒░ ▓██▄   ▓██  ▒██░▒██░   ▒██  ▀█▄ ▒ ▓██░ ▒░▒██░  ██▒▓██ ░▄█ ▒
-▒▓▓▄ ▄██▒░██▄▄▄▄██ ▒██▄█▓▒ ▒  ▒   ██▒▓▓█  ░██░▒██░   ░██▄▄▄▄██░ ▓██▓ ░ ▒██   ██░▒██▀▀█▄  
-▒ ▓███▀ ░ ▓█   ▓██▒▒██▒ ░  ░▒██████▒▒▒▒█████▓ ░██████▒▓█   ▓██▒ ▒██▒ ░ ░ ████▓▒░░██▓ ▒██▒
-░ ░▒ ▒  ░ ▒▒   ▓▒█░▒▓▒░ ░  ░▒ ▒▓▒ ▒ ░░▒▓▒ ▒ ▒ ░ ▒░▓  ░▒▒   ▓▒█░ ▒ ░░   ░ ▒░▒░▒░ ░ ▒▓ ░▒▓░
-  ░  ▒     ▒   ▒▒ ░░▒ ░     ░ ░▒  ░ ░░░▒░ ░ ░ ░ ░ ▒  ░ ▒   ▒▒ ░   ░      ░ ▒ ▒░   ░▒ ░ ▒░
-░          ░   ▒   ░░       ░  ░  ░   ░░░ ░ ░   ░ ░    ░   ▒    ░      ░ ░ ░ ▒    ░░   ░ 
-░ ░            ░  ░               ░     ░         ░  ░     ░  ░            ░ ░     ░     
-░                                                                                        \n`);
-
+async function createFrontendProject() {
   const { projectName, projectType } = await inquirer.prompt([
     {
       type: "input",
       name: "projectName",
-      message: "Quel est le nom de votre projet ?",
+      message: "Quel est le nom de votre projet frontend ?",
       default: "my-capsulator-app",
     },
     {
@@ -209,7 +184,7 @@ async function main() {
   console.log(
     `\n${
       colors.redMatrix + colors.bright
-    }╰( ͡° ͜ʖ ͡° )つ──☆*:・ﾟ Création d'un nouveau projet ${projectType} nommé ${projectName}...\n`
+    }╰( ͡° ͜ʖ ͡°)つ──☆*:・ﾟ Création d'un nouveau projet ${projectType} nommé ${projectName}...\n`
   );
 
   if (projectType === "next") {
@@ -246,28 +221,22 @@ async function main() {
     execSync(`cd ${projectName} && npm install ${dep}`, { stdio: "inherit" });
   }
 
-  // Fonction pour générer le fichier connection.js
-  function generateConnectionFile(projectName) {
-    const content = `
-const mongoose = require('mongoose');
+  console.log(
+    `\n${
+      colors.redMatrix + colors.bright + colors.underscore
+    }ʕっ•ᴥ•ʔっ Projet frontend créé avec succès !\n`
+  );
+}
 
-const connectionString = process.env.CONNECTION_STRING;
-
-mongoose.connect(connectionString, { connectTimeoutMS: 2000 })
-  .then(() => console.log('Database connected'))
-  .catch(error => console.error(error));
-`;
-
-    const dirPath = join(process.cwd(), projectName, "models");
-    const filePath = join(dirPath, "connection.js");
-
-    // Créer le répertoire 'models' si il n'existe pas
-    if (!fs.existsSync(dirPath)) {
-      fs.mkdirSync(dirPath, { recursive: true });
-    }
-
-    fs.writeFileSync(filePath, content);
-  }
+async function createBackendProject() {
+  const { projectName } = await inquirer.prompt([
+    {
+      type: "input",
+      name: "projectName",
+      message: "Quel est le nom de votre projet backend ?",
+      default: "my-capsulator-backend",
+    },
+  ]);
 
   const backendDeps = [
     "cors",
@@ -278,117 +247,109 @@ mongoose.connect(connectionString, { connectTimeoutMS: 2000 })
     { name: "mongoose", postInstall: generateConnectionFile },
   ];
 
-  const { installBackend } = await inquirer.prompt([
+  console.log(
+    `\n${
+      colors.redMatrix + colors.bright
+    }Création du projet backend ${projectName}...\n`
+  );
+
+  // Créer le répertoire pour le backend
+  fs.mkdirSync(projectName);
+
+  // Générer le projet Express dans ce répertoire
+  execSync(`cd ${projectName} && express --no-view`, {
+    stdio: "inherit",
+  });
+
+  const { selectedBackendDeps } = await inquirer.prompt([
     {
-      type: "confirm",
-      name: "installBackend",
-      message: "Voulez-vous installer un backend (Express) ?",
-      default: false,
+      type: "checkbox",
+      name: "selectedBackendDeps",
+      message: "Quelles dépendances de backend voulez-vous installer ?",
+      choices: backendDeps.map((dep) =>
+        typeof dep === "string" ? dep : dep.name
+      ),
     },
   ]);
 
-  if (installBackend) {
-    // Assurez-vous que 'express-generator' est installé
-    await ensureCommandExists("express-generator");
+  for (const dep of backendDeps) {
+    const depName = typeof dep === "string" ? dep : dep.name;
+    if (selectedBackendDeps.includes(depName)) {
+      console.log(
+        `\n\n${
+          colors.redMatrix + colors.bright
+        }Installation de ${depName}... (˵ ͡° ͜ʖ ͡°˵)\n`
+      );
+      execSync(`cd ${projectName} && npm install ${depName}`, {
+        stdio: "inherit",
+      });
 
-    console.log(
-      `\n\n${
-        colors.redMatrix + colors.bright
-      }Création du squelette de l'application Express... (˵ ͡° ͜ʖ ͡°˵)\n`
-    );
-
-    // Demander le nom du projet backend
-    const { backendProjectName: projectName } = await inquirer.prompt([
-      {
-        type: "input",
-        name: "backendProjectName",
-        message: "Quel est le nom de votre projet backend ?",
-        validate: (input) => !!input,
-      },
-    ]);
-
-    backendProjectName = projectName;
-
-    // Créer le répertoire pour le backend
-    fs.mkdirSync(join(process.cwd(), backendProjectName));
-
-    // Générer le projet Express dans ce répertoire
-    execSync(`cd ${backendProjectName} && express --no-view`, {
-      stdio: "inherit",
-    });
-
-    const { selectedBackendDeps } = await inquirer.prompt([
-      {
-        type: "checkbox",
-        name: "selectedBackendDeps",
-        message: "Quelles dépendances de backend voulez-vous installer ?",
-        choices: backendDeps.map((dep) =>
-          typeof dep === "string" ? dep : dep.name
-        ),
-      },
-    ]);
-
-    for (const dep of backendDeps) {
-      const depName = typeof dep === "string" ? dep : dep.name;
-      if (selectedBackendDeps.includes(depName)) {
-        console.log(
-          `\n\n${
-            colors.redMatrix + colors.bright
-          }Installation de ${depName}... (˵ ͡° ͜ʖ ͡°˵)\n`
-        );
-        execSync(`cd ${backendProjectName} && npm install ${depName}`, {
-          stdio: "inherit",
-        });
-
-        if (dep.postInstall) {
-          dep.postInstall(backendProjectName);
-        }
+      if (dep.postInstall) {
+        dep.postInstall(projectName);
       }
     }
-  }
-
-  const { deployVercel } = await inquirer.prompt([
-    {
-      type: "confirm",
-      name: "deployVercel",
-      message: "Voulez-vous déployer sur Vercel ?",
-      default: false,
-    },
-  ]);
-
-  if (deployVercel) {
-    const vercelConfig = `
-{
-  "version": 2,
-  "builds": [
-    {
-      "src": "app.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "app.js"
-    }
-  ]
-}
-`;
-    const filePath = join(process.cwd(), backendProjectName, "vercel.json");
-    fs.writeFileSync(filePath, vercelConfig);
-
-    console.log(
-      `\n${
-        colors.redMatrix + colors.bright + colors.underscore
-      }Fichier vercel.json généré avec succès !\n`
-    );
   }
 
   console.log(
     `\n${
       colors.redMatrix + colors.bright + colors.underscore
-    }ʕっ•ᴥ•ʔっ Tout est Prêt !\n`
+    }ʕっ•ᴥ•ʔっ Projet backend créé avec succès !\n`
   );
+}
+
+// Fonction pour générer le fichier connection.js
+function generateConnectionFile(projectName) {
+  const content = `
+const mongoose = require('mongoose');
+
+const connectionString = process.env.CONNECTION_STRING;
+
+mongoose.connect(connectionString, { connectTimeoutMS: 2000 })
+  .then(() => console.log('Database connected'))
+  .catch(error => console.error(error));
+`;
+
+  const dirPath = join(process.cwd(), projectName, "models");
+  const filePath = join(dirPath, "connection.js");
+
+  // Créer le répertoire 'models' si il n'existe pas
+  if (!fs.existsSync(dirPath)) {
+    fs.mkdirSync(dirPath, { recursive: true });
+  }
+
+  fs.writeFileSync(filePath, content);
+}
+
+async function main() {
+  // Affiche un message de bienvenue.
+  console.log(`\n${colors.redMatrix + colors.bright}
+ ▄████▄   ▄▄▄       ██▓███    ██████  █    ██  ██▓    ▄▄▄     ▄▄▄█████▓ ▒█████   ██▀███  
+▒██▀ ▀█  ▒████▄    ▓██░  ██▒▒██    ▒  ██  ▓██▒▓██▒   ▒████▄   ▓  ██▒ ▓▒▒██▒  ██▒▓██ ▒ ██▒
+▒▓█    ▄ ▒██  ▀█▄  ▓██░ ██▓▒░ ▓██▄   ▓██  ▒██░▒██░   ▒██  ▀█▄ ▒ ▓██░ ▒░▒██░  ██▒▓██ ░▄█ ▒
+▒▓▓▄ ▄██▒░██▄▄▄▄██ ▒██▄█▓▒ ▒  ▒   ██▒▓▓█  ░██░▒██░   ░██▄▄▄▄██░ ▓██▓ ░ ▒██   ██░▒██▀▀█▄  
+▒ ▓███▀ ░ ▓█   ▓██▒▒██▒ ░  ░▒██████▒▒▒▒█████▓ ░██████▒▓█   ▓██▒ ▒██▒ ░ ░ ████▓▒░░██▓ ▒██▒
+░ ░▒ ▒  ░ ▒▒   ▓▒█░▒▓▒░ ░  ░▒ ▒▓▒ ▒ ░░▒▓▒ ▒ ▒ ░ ▒░▓  ░▒▒   ▓▒█░ ▒ ░░   ░ ▒░▒░▒░ ░ ▒▓ ░▒▓░
+  ░  ▒     ▒   ▒▒ ░░▒ ░     ░ ░▒  ░ ░░░▒░ ░ ░ ░ ░ ▒  ░ ▒   ▒▒ ░   ░      ░ ▒ ▒░   ░▒ ░ ▒░
+░          ░   ▒   ░░       ░  ░  ░   ░░░ ░ ░   ░ ░    ░   ▒    ░      ░ ░ ░ ▒    ░░   ░ 
+░ ░            ░  ░               ░     ░         ░  ░     ░  ░            ░ ░     ░     
+░                                                                                        \n`);
+
+  const { projectType } = await inquirer.prompt([
+    {
+      type: "list",
+      name: "projectType",
+      message: "Quel type de projet voulez-vous créer ?",
+      choices: ["frontend", "backend", "full stack"],
+    },
+  ]);
+
+  if (projectType === "frontend" || projectType === "full stack") {
+    await createFrontendProject();
+  }
+
+  if (projectType === "backend" || projectType === "full stack") {
+    await createBackendProject();
+  }
 
   console.log(
     `\n${colors.redMatrix + colors.bright + colors.underscore}© 2023 ${
