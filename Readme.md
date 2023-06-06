@@ -1,8 +1,5 @@
 # Boilercaps
 
-![npm](https://img.shields.io/npm/v/boilercaps)
-![build](https://img.shields.io/github/workflow/status/SBigz/Boilercaps/build)
-
 Boilercaps est un outil de génération de projets qui vous aide à créer rapidement des applications frontend et backend en JavaScript et Node.js.
 
 ## 🚀 Installation
