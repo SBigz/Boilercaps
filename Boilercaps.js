@@ -169,7 +169,7 @@ async function createFrontendProject() {
       type: "input",
       name: "projectName",
       message: "Quel est le nom de votre projet frontend ?",
-      default: "my-capsulator-app",
+      default: "my-boilercaps-app",
     },
     {
       type: "list",
@@ -234,7 +234,7 @@ async function createBackendProject() {
       type: "input",
       name: "projectName",
       message: "Quel est le nom de votre projet backend ?",
-      default: "my-capsulator-backend",
+      default: "my-boilercaps-backend",
     },
   ]);
 
@@ -322,17 +322,17 @@ mongoose.connect(connectionString, { connectTimeoutMS: 2000 })
 
 async function main() {
   // Affiche un message de bienvenue.
-  console.log(`\n${colors.redMatrix + colors.bright}
- ▄████▄   ▄▄▄       ██▓███    ██████  █    ██  ██▓    ▄▄▄     ▄▄▄█████▓ ▒█████   ██▀███  
-▒██▀ ▀█  ▒████▄    ▓██░  ██▒▒██    ▒  ██  ▓██▒▓██▒   ▒████▄   ▓  ██▒ ▓▒▒██▒  ██▒▓██ ▒ ██▒
-▒▓█    ▄ ▒██  ▀█▄  ▓██░ ██▓▒░ ▓██▄   ▓██  ▒██░▒██░   ▒██  ▀█▄ ▒ ▓██░ ▒░▒██░  ██▒▓██ ░▄█ ▒
-▒▓▓▄ ▄██▒░██▄▄▄▄██ ▒██▄█▓▒ ▒  ▒   ██▒▓▓█  ░██░▒██░   ░██▄▄▄▄██░ ▓██▓ ░ ▒██   ██░▒██▀▀█▄  
-▒ ▓███▀ ░ ▓█   ▓██▒▒██▒ ░  ░▒██████▒▒▒▒█████▓ ░██████▒▓█   ▓██▒ ▒██▒ ░ ░ ████▓▒░░██▓ ▒██▒
-░ ░▒ ▒  ░ ▒▒   ▓▒█░▒▓▒░ ░  ░▒ ▒▓▒ ▒ ░░▒▓▒ ▒ ▒ ░ ▒░▓  ░▒▒   ▓▒█░ ▒ ░░   ░ ▒░▒░▒░ ░ ▒▓ ░▒▓░
-  ░  ▒     ▒   ▒▒ ░░▒ ░     ░ ░▒  ░ ░░░▒░ ░ ░ ░ ░ ▒  ░ ▒   ▒▒ ░   ░      ░ ▒ ▒░   ░▒ ░ ▒░
-░          ░   ▒   ░░       ░  ░  ░   ░░░ ░ ░   ░ ░    ░   ▒    ░      ░ ░ ░ ▒    ░░   ░ 
-░ ░            ░  ░               ░     ░         ░  ░     ░  ░            ░ ░     ░     
-░                                                                                        \n`);
+  console.log(`\n${colors.redMatrix + colors.bright} 
+  ▄▄▄▄    ▒█████   ██▓ ██▓    ▓█████  ██▀███   ▄████▄   ▄▄▄       ██▓███    ██████ 
+  ▓█████▄ ▒██▒  ██▒▓██▒▓██▒    ▓█   ▀ ▓██ ▒ ██▒▒██▀ ▀█  ▒████▄    ▓██░  ██▒▒██    ▒ 
+  ▒██▒ ▄██▒██░  ██▒▒██▒▒██░    ▒███   ▓██ ░▄█ ▒▒▓█    ▄ ▒██  ▀█▄  ▓██░ ██▓▒░ ▓██▄   
+  ▒██░█▀  ▒██   ██░░██░▒██░    ▒▓█  ▄ ▒██▀▀█▄  ▒▓▓▄ ▄██▒░██▄▄▄▄██ ▒██▄█▓▒ ▒  ▒   ██▒
+  ░▓█  ▀█▓░ ████▓▒░░██░░██████▒░▒████▒░██▓ ▒██▒▒ ▓███▀ ░ ▓█   ▓██▒▒██▒ ░  ░▒██████▒▒
+  ░▒▓███▀▒░ ▒░▒░▒░ ░▓  ░ ▒░▓  ░░░ ▒░ ░░ ▒▓ ░▒▓░░ ░▒ ▒  ░ ▒▒   ▓▒█░▒▓▒░ ░  ░▒ ▒▓▒ ▒ ░
+  ▒░▒   ░   ░ ▒ ▒░  ▒ ░░ ░ ▒  ░ ░ ░  ░  ░▒ ░ ▒░  ░  ▒     ▒   ▒▒ ░░▒ ░     ░ ░▒  ░ ░
+   ░    ░ ░ ░ ░ ▒   ▒ ░  ░ ░      ░     ░░   ░ ░          ░   ▒   ░░       ░  ░  ░  
+   ░          ░ ░   ░      ░  ░   ░  ░   ░     ░ ░            ░  ░               ░  
+        ░                                      ░                                    \n`);
 
   const { projectType } = await inquirer.prompt([
     {
@@ -356,7 +356,7 @@ async function main() {
       colors.whiteText + colors.blackBackground
     }Code${colors.blackText + colors.whiteBackground}Sacha${
       colors.reset + colors.redMatrix + colors.bright + colors.underscore
-    } https://github.com/SBigz/Capsulator\n`
+    } https://github.com/SBigz/Boilercaps\n`
   );
 }
 
