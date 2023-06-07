@@ -1,7 +1,5 @@
 # Boilercaps
 
-![Boilercaps Banner](./site/banner.png)
-
 Boilercaps est un outil de génération de projets qui vous aide à créer rapidement des applications frontend et backend en JavaScript et Node.js.
 
 ![Terminal GIF](./site/terminal.gif)
@@ -42,3 +40,5 @@ N'hésitez pas à contribuer à ce projet en ouvrant des Issues et en proposant 
 MIT License. Voir [LICENSE](./LICENSE.txt) pour plus de détails.
 
 © 2023 CodeSacha - Sacha Bigou
+
+![Boilercaps Banner](./site/banner.png)
