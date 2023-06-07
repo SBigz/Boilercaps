@@ -1,6 +1,6 @@
 {
   "name": "boilercaps",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "",
   "main": "Boilercaps.js",
   "scripts": {
@@ -19,5 +19,8 @@
   "dependencies": {
     "inquirer": "^9.2.6"
   },
-  "type": "module"
+  "type": "module",
+  "bin": {
+    "boilercaps": "./Boilercaps.js"
+  }
 }

@@ -1,6 +1,10 @@
 # Boilercaps
 
+![Boilercaps Banner](./site/banner.png)
+
 Boilercaps est un outil de génération de projets qui vous aide à créer rapidement des applications frontend et backend en JavaScript et Node.js.
+
+![Terminal GIF](./site/terminal.gif)
 
 ## 🚀 Installation
 
@@ -13,7 +17,7 @@ npm install -g boilercaps
 Pour créer un nouveau projet, utilisez simplement la commande suivante et suivez les instructions:
 
 ```bash
-boilercaps create
+boilercaps
 ```
 
 Vous pouvez choisir parmi plusieurs types de projets :
@@ -35,6 +39,6 @@ N'hésitez pas à contribuer à ce projet en ouvrant des Issues et en proposant 
 
 ## 📝 License
 
-MIT License. Voir [LICENSE](./LICENSE) pour plus de détails.
+MIT License. Voir [LICENSE](./LICENSE.txt) pour plus de détails.
 
 © 2023 CodeSacha - Sacha Bigou

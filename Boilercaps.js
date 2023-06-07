@@ -184,12 +184,15 @@ async function createFrontendProject() {
   console.log(
     `\n${
       colors.redMatrix + colors.bright
-    }╰( ͡° ͜ʖ ͡°)つ──☆*:・ﾟ Création d'un nouveau projet ${projectType} nommé ${projectName}...\n`
+    }╰( ͡° ͜ʖ ͡°)つ──☆*:・ﾟ Création d'un nouveau projet ${projectType} nommé "${projectName}"...\n`
   );
 
   if (projectType === "next") {
     await ensureCommandExists("create-next-app");
-    execSync(`npx create-next-app ${projectName}`, { stdio: "inherit" });
+    execSync(
+      `npx create-next-app -e https://github.com/SBigz/nextjs-starter ${projectName}`,
+      { stdio: "inherit" }
+    );
   } else {
     await ensureCommandExists(`create-${projectType}-app`);
     execSync(`npx create-${projectType}-app ${projectName}`, {
@@ -199,7 +202,7 @@ async function createFrontendProject() {
 
   console.log(
     `\n${
-      colors.redMatrix + colors.bright + colors.underscore
+      colors.redMatrix + colors.bright
     }(づ ￣ ³￣)づ Installation des dépendances...\n`
   );
 
@@ -241,7 +244,7 @@ async function createBackendProject() {
   const backendDeps = [
     "cors",
     "node-fetch@2",
-    "dotenv",
+    { name: "dotenv", postInstall: generateEnvFile },
     "jest",
     "supertest",
     { name: "mongoose", postInstall: generateConnectionFile },
@@ -250,7 +253,7 @@ async function createBackendProject() {
   console.log(
     `\n${
       colors.redMatrix + colors.bright
-    }Création du projet backend ${projectName}...\n`
+    }(｡◕‿‿◕｡) Création du projet backend Express "${projectName}"...\n`
   );
 
   // Créer le répertoire pour le backend
@@ -290,6 +293,43 @@ async function createBackendProject() {
     }
   }
 
+  const { deployVercel } = await inquirer.prompt([
+    {
+      type: "confirm",
+      name: "deployVercel",
+      message: "Voulez-vous déployer sur Vercel ?",
+      default: false,
+    },
+  ]);
+
+  if (deployVercel) {
+    const vercelConfig = `
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "app.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "app.js"
+    }
+  ]
+}
+`;
+    const filePath = join(process.cwd(), projectName, "vercel.json");
+    fs.writeFileSync(filePath, vercelConfig);
+
+    console.log(
+      `\n${
+        colors.redMatrix + colors.bright + colors.underscore
+      }☜(⌒▽⌒)☞ Fichier vercel.json généré avec succès !\n`
+    );
+  }
+
   console.log(
     `\n${
       colors.redMatrix + colors.bright + colors.underscore
@@ -316,6 +356,17 @@ mongoose.connect(connectionString, { connectTimeoutMS: 2000 })
   if (!fs.existsSync(dirPath)) {
     fs.mkdirSync(dirPath, { recursive: true });
   }
+
+  fs.writeFileSync(filePath, content);
+}
+
+// Fonction pour générer le fichier .env
+function generateEnvFile(projectName) {
+  const content = `
+CONNECTION_STRING="";
+`;
+
+  const filePath = join(process.cwd(), projectName, ".env");
 
   fs.writeFileSync(filePath, content);
 }
@@ -356,7 +407,7 @@ async function main() {
       colors.whiteText + colors.blackBackground
     }Code${colors.blackText + colors.whiteBackground}Sacha${
       colors.reset + colors.redMatrix + colors.bright + colors.underscore
-    } https://github.com/SBigz/Boilercaps\n`
+    } https://github.com/SBigz/Boilercaps\n\nYᵒᵘ Oᶰˡʸ Lᶤᵛᵉ Oᶰᶜᵉ`
   );
 }
 
