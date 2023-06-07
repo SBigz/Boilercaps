@@ -1,6 +1,6 @@
 # Boilercaps
 
-Boilercaps est un outil de génération de projets qui vous aide à créer rapidement des applications frontend et backend en JavaScript et Node.js.
+Boilercaps is a project generation tool that helps you quickly create frontend and backend applications using JavaScript and Node.js.
 
 ![Terminal GIF](./site/terminal.gif)
 
@@ -10,34 +10,37 @@ Boilercaps est un outil de génération de projets qui vous aide à créer rapid
 npm install -g boilercaps
 ```
 
-## 🕹️ Utilisation
+## 🕹️ Usage
 
-Pour créer un nouveau projet, utilisez simplement la commande suivante et suivez les instructions:
+To create a new project, navigate to the root directory of your project (which should be empty), and then use the following command:
 
 ```bash
 boilercaps
 ```
 
-Vous pouvez choisir parmi plusieurs types de projets :
+This command will initiate the project generation process and provide you with instructions to follow.
+Make sure you are in the desired directory where you want to create your project before running the boilercaps command.
+
+You can choose from multiple project types:
 
 - Frontend (React, React Native, Expo, Next.js)
-- Backend (Express avec diverses dépendances optionnelles)
-- Full Stack (Frontend et Backend combinés)
+- Backend (Express with various optional dependencies)
+- Full Stack (Combined frontend and backend)
 
-## 🔧 Fonctionnalités
+## 🔧 Features
 
-- Création automatique du projet avec l'outil de votre choix (create-react-app, create-next-app, etc.)
-- Installation des dépendances les plus courantes en une seule commande
-- Personnalisation complète des dépendances installées
-- Création automatique de certains fichiers de configuration (vercel.json, connexion à MongoDB)
+- Automatic project creation using the tool of your choice (create-react-app, create-next-app, etc.)
+- Installation of common dependencies with a single command
+- Full customization of installed dependencies
+- Automatic generation of certain configuration files (.env, vercel.json, MongoDB connection)
 
 ## 💡 Contribution
 
-N'hésitez pas à contribuer à ce projet en ouvrant des Issues et en proposant des Pull Requests.
+Feel free to contribute to this project by opening Issues and proposing Pull Requests.
 
 ## 📝 License
 
-MIT License. Voir [LICENSE](./LICENSE.txt) pour plus de détails.
+MIT License. See [LICENSE](./LICENSE.txt) for more details.
 
 © 2023 CodeSacha - Sacha Bigou
 

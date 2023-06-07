@@ -130,7 +130,7 @@ const dependencies = {
   ],
 };
 
-// Fonction qui vérifie si une commande est installée sur le système.
+// Fonction qui vérifie si une commande est installée sur le système. (Booleen)
 function commandExists(command) {
   try {
     execSync(`command -v ${command}`, { stdio: "ignore" });
