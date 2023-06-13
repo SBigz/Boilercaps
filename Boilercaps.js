@@ -68,6 +68,7 @@ const dependencies = {
     "styled-components@latest",
     "socket.io-client",
     "swr",
+    "react-native-tailwindcss",
     "toggle-switch-react-native",
     "uuid",
   ],
