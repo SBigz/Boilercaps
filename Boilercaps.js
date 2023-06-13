@@ -32,6 +32,7 @@ const dependencies = {
     "react-router-dom",
     "styled-components@latest",
     "socket.io-client",
+    "tailwindcss",
     "uuid",
     "swr",
   ],
@@ -108,6 +109,7 @@ const dependencies = {
     "react-native-safe-area-context",
     "react-native-screens",
     "react-native-svg",
+    "react-native-tailwindcss",
     "react-native-vector-icons",
     "react-redux",
     "react-router-dom",
@@ -132,6 +134,7 @@ const dependencies = {
     "socket.io-client",
     "swr",
     "uuid",
+    "tailwindcss",
   ],
 };
 
